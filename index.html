@@ -456,8 +456,44 @@ section{padding:100px 0}
   </div>
 </footer>
 
+<!-- ======== Copy Guard ======== -->
+<style>
+/* Watermark overlay */
+.wm-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;overflow:hidden}
+.wm-overlay::before{
+  content:"DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI　DRAFT — AKASHIKI";
+  position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  font-size:18px;font-weight:700;letter-spacing:.15em;font-family:Arial,sans-serif;
+  color:rgba(0,0,0,.045);white-space:nowrap;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:60px;
+  transform:rotate(-35deg);line-height:4;
+}
+/* Sticky banner */
+.copy-guard-banner{
+  position:fixed;bottom:0;left:0;width:100%;z-index:9999;
+  background:rgba(20,20,25,.92);backdrop-filter:blur(8px);
+  color:rgba(255,255,255,.85);text-align:center;
+  padding:10px 20px;font-size:12px;font-weight:600;letter-spacing:.06em;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  border-top:2px solid rgba(232,99,10,.6);
+}
+.copy-guard-banner span{color:#E8630A}
+/* Text selection disabled */
+body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+/* Print disabled */
+@media print{body{display:none}body::after{content:"このページは印刷できません。";display:block;font-size:24px;text-align:center;padding:100px;font-family:sans-serif}}
+</style>
+<div class="wm-overlay"></div>
+<div class="copy-guard-banner">本ページはご依頼主様専用に制作したサンプルです。他の用途でのご利用はお控えください。｜<span>AKASHIKI</span></div>
+
 <!-- ======== JavaScript ======== -->
 <script>
+// ── Copy Guard: right-click & shortcut disable ──
+document.addEventListener('contextmenu',e=>{e.preventDefault();alert('ソースの閲覧はご遠慮ください。')});
+document.addEventListener('keydown',e=>{
+  if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(e.key.toUpperCase()))||(e.ctrlKey&&['u','U','s','S','c','C','p','P'].includes(e.key))){e.preventDefault();alert('この操作は無効です。')}
+});
+
 // Header scroll effect
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
